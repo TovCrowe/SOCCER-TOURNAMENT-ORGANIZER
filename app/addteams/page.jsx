@@ -1,18 +1,35 @@
-"use client";
-import { useState } from "react";
+'use client'
+import React, { useState } from "react";
 import addTeam from "../db/add-team";
 
 function Page() {
-  const [teamData, setTeamData] = useState({
+  const initialTeamData = {
     team_name: "",
     city: "",
     foundation_year: 0,
-  });
+  };
 
+  const [teamData, setTeamData] = useState(initialTeamData);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submit button clicked"); 
 
-  }
+    if (!teamData.team_name || !teamData.city || !teamData.foundation_year) {
+      setError("Please fill in all the fields");
+      return;
+    }
+
+    try {
+      await addTeam(teamData.team_name, teamData.city, teamData.foundation_year);
+      setTeamData(initialTeamData);
+      setError(null);
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+      setError("An error occurred while submitting the form.");
+    }
+  };
 
   return (
     <div>
@@ -21,29 +38,25 @@ function Page() {
       </h1>
       <form
         onSubmit={handleSubmit}
-        method="post"
         className="flex flex-col rounded-xl shadow-xl p-3"
       >
         <div className="flex flex-col mb-5">
-          <label
-            htmlFor="name"
-            className="underline decoration-green-400 font-bold"
-          >
+          <label htmlFor="name" className="underline decoration-green-400 font-bold">
             Team name:
           </label>
           <input
             type="text"
             id="name"
             name="name"
-            className="bg-green-100 rounded-xl  p-3"
+            className="bg-green-100 rounded-xl p-3"
+            value={teamData.team_name}
+            onChange={(e) =>
+              setTeamData({ ...teamData, team_name: e.target.value })
+            }
           />
         </div>
         <div className="flex flex-col mb-5">
-          {" "}
-          <label
-            htmlFor="city"
-            className="underline decoration-green-400 font-bold"
-          >
+          <label htmlFor="city" className="underline decoration-green-400 font-bold">
             City:
           </label>
           <input
@@ -51,25 +64,30 @@ function Page() {
             id="city"
             name="city"
             className="bg-green-100 rounded-xl p-3"
+            value={teamData.city}
+            onChange={(e) => setTeamData({ ...teamData, city: e.target.value })}
           />
         </div>
         <div className="flex flex-col mb-5">
-          {" "}
-          <label
-            htmlFor="foundation"
-            className="underline decoration-green-400 font-bold"
-          >
+          <label htmlFor="foundation" className="underline decoration-green-400 font-bold">
             Foundation year:
           </label>
           <input
-            type="text"
+            type="number"
             id="foundation"
             name="foundation"
             className="bg-green-100 rounded-xl p-3"
+            value={teamData.foundation_year}
+            onChange={(e) =>
+              setTeamData({
+                ...teamData,
+                foundation_year: parseInt(e.target.value) || 0,
+              })
+            }
           />
         </div>
+        {error && <div className="text-red-600 mb-3">{error}</div>}
         <div className="flex flex-col mb-5">
-          {" "}
           <button
             type="submit"
             className="bg-green-200 hover:bg-green-400 p-3 rounded-full font-bold"
