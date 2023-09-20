@@ -10,16 +10,14 @@ function PositionsTable() {
       try {
         const teamsData = await getTeamsData();
         
-        // Ordena los equipos por puntos de forma descendente,
-        // y luego por diferencia de goles de forma descendente,
-        // y finalmente por goles anotados de forma descendente.
+  
         const sortedTeams = teamsData.sort((a, b) => {
           if (b.points !== a.points) {
-            return b.points - a.points; // Ordena por puntos
+            return b.points - a.points; 
           } else if (b.goalDifference !== a.goalDifference) {
-            return b.goalDifference - a.goalDifference; // Ordena por diferencia de goles
+            return b.goalDifference - a.goalDifference; 
           } else {
-            return b.goalsScored - a.goalsScored; // Ordena por goles anotados
+            return b.goalsScored - a.goalsScored; // 
           }
         });
   
@@ -34,7 +32,7 @@ function PositionsTable() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-4">Positions Table</h1>
+      <h1 className="text-2xl font-semibold mb-4 animate-fade-right">Positions Table</h1>
       <Suspense fallback={<p>Loading...</p>}>
         <Table teams={teams} />
       </Suspense>

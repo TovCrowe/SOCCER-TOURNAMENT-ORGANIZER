@@ -1,39 +1,9 @@
-'use client'
-import React, { useState } from "react";
-import addTeam from "../db/add-team";
+import React from 'react'
 
-function Page() {
-  const initialTeamData = {
-    team_name: "",
-    city: "",
-    foundation_year: 0,
-  };
-
-  const [teamData, setTeamData] = useState(initialTeamData);
-  const [error, setError] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Submit button clicked"); 
-
-    if (!teamData.team_name || !teamData.city || !teamData.foundation_year) {
-      setError("Please fill in all the fields");
-      return;
-    }
-
-    try {
-      await addTeam(teamData.team_name, teamData.city, teamData.foundation_year);
-      setTeamData(initialTeamData);
-      setError(null);
-    } catch (error) {
-      console.error("Error submitting the form:", error);
-      setError("An error occurred while submitting the form.");
-    }
-  };
-
+function FormTeam() {
   return (
-    <div>
-      <h1 className="text-center text-6xl text-green-700 mb-8 font-bold p-3">
+    <>
+    <h1 className="animate-pulse text-center text-6xl text-green-700 mb-8 font-bold p-3">
         Add a team
       </h1>
       <form
@@ -89,18 +59,17 @@ function Page() {
             }
           />
         </div>
-        {error && <div className="text-red-600 mb-3">{error}</div>}
         <div className="flex flex-col mb-5">
           <button
             type="submit"
-            className="bg-green-200 hover:bg-green-400 p-3 rounded-full font-bold"
+            className=" transition duration-150 ease-in-out bg-green-200 hover:bg-green-400 p-3 rounded-full font-bold"
           >
             Submit
           </button>
         </div>
       </form>
-    </div>
-  );
+      </>
+  )
 }
 
-export default Page;
+export default FormTeam
