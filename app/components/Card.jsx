@@ -1,9 +1,12 @@
-import React from "react";
+'use client'
+import {useEffect} from "react";
 import {motion} from "framer-motion";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 
 function Card({ team }) {
+    const router = useRouter(); 
+
   return (
     <div
 
@@ -27,6 +30,7 @@ function Card({ team }) {
           className="inline-block rounded bg-primary px-6 pb-2 pt-2 text-xs font-medium uppercase leading-normal text-white bg-black shadow-xl"
           data-te-ripple-init
           data-te-ripple-color="light"
+        onClick={() => router.push(`/manageteams/${team.team_id}`)}
         >
           Manage team
         </motion.button>
