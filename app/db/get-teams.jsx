@@ -1,6 +1,6 @@
 export default async function getTeamsData() {
     try {
-        const response = await fetch('https://render-soccer-teams.onrender.com/teams/', {
+        const response = await fetch(process.env.NEXT_PUBLIC_DATABASE_URL, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,4 +16,5 @@ export default async function getTeamsData() {
         console.log(error)
     }
 }
+
 

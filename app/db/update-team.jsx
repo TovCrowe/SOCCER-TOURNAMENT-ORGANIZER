@@ -1,17 +1,11 @@
-export default async function updateTeam() {
+export default async function updateTeam(id,updatedTeamData) {
     try {
-        const response = await fetch('https://render-soccer-teams.onrender.com/teams/', {
+        const response = await fetch(`process.env.NEXT_PUBLIC_DATABASE_URL/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                id: '1',
-                name: 'Real Madrid',
-                country: 'Spain',
-                stadium: 'Santiago Bernabeu',
-                capacity: '5000000'
-            })
+            body: JSON.stringify(updatedTeamData)
         });
         if (!response.ok) {
             throw new Error('Network response was not ok');

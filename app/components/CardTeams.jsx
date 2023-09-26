@@ -4,12 +4,14 @@ import {motion} from "framer-motion";
 import { useRouter } from 'next/navigation';
 
 
-function Card({ team }) {
+function CardTeams({ team }) {
     const router = useRouter(); 
 
   return (
-    <div
-
+    <motion.div
+    whileHover={{ scale: 1.020 }}
+    whileTap={{ scale: 0.9 }}
+    transition={{ duration: 0.2 }}
       className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-green-700"
     >
       <h5 className="border-b-2 border-neutral-100 px-6 py-3 text-xl font-medium leading-tight dark:text-neutral-50">
@@ -35,8 +37,8 @@ function Card({ team }) {
           Manage team
         </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-export default Card;
+export default CardTeams;

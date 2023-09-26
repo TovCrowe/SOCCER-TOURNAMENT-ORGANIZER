@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import addTeam from "../db/add-team";
 
-function Page() {
+function AddTeams() {
   const initialTeamData = {
     team_name: "",
     city: "",
@@ -14,7 +14,6 @@ function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submit button clicked"); 
 
     if (!teamData.team_name || !teamData.city || !teamData.foundation_year) {
       setError("Please fill in all the fields");
@@ -103,4 +102,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default AddTeams;

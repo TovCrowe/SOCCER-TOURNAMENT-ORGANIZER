@@ -1,6 +1,6 @@
 export default async function addTeam(team_name, city, foundation_year) { 
     try {
-        const response = await fetch('https://render-soccer-teams.onrender.com/teams/', {
+        const response = await fetch(process.env.NEXT_PUBLIC_DATABASE_URL, {
             'method': 'POST',
             'headers': {
                 'Content-Type': 'application/json'

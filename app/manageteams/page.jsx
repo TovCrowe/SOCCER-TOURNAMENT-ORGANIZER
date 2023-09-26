@@ -1,10 +1,9 @@
 'use client'
 import { motion } from "framer-motion";
 import {useState, useEffect, Suspense} from "react";
-import Modal from "../components/Modal";
-import Card from "../components/Card";
+import CardTeams from "../components/CardTeams";
 import getTeamsData from "../db/get-teams";
-function page() {
+function ManageTeams() {
 
   const [teams, setTeams] = useState([]);
 
@@ -20,7 +19,7 @@ function page() {
     }
   
     fetchData();
-  }, [teams]);
+  }, []);
   return (
     <>
     <h1 className="text-center text-6xl text-green-700 mb-8 font-bold p-3">
@@ -29,7 +28,7 @@ function page() {
         
       <div className="grid grid-cols-2 gap-4 justify-evenly">
       {teams.map((team,index)  => (
-        <Card team={team} key={index} />
+        <CardTeams team={team} key={index} />
       ))}
       
     </div>
@@ -38,4 +37,4 @@ function page() {
   );
 }
 
-export default page;
+export default ManageTeams;

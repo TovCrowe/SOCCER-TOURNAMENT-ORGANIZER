@@ -20,7 +20,7 @@ function Table({teams}) {
     <tbody>
     {teams.map((team, index) => (
         <tr key={index} className="odd:bg-green-200 even:bg-green-100  border-slate-600">
-          <td className="px-4 py-2  text-center border-slate-600 ">{index + 1}</td>
+          <td className="px-4 py-2  text-center border border-slate-600 ">{index + 1}</td>
         
           <td className="px-4 py-2 text-center border border-slate-600 ">{team.team_name}</td>
           <td className="px-4 py-2 text-center border border-slate-600">{team.points}</td>
