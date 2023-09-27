@@ -1,5 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import updateTeam from "../db/update-team";
+
+
+
 function EditForm({
   name,
   team,
@@ -14,27 +18,36 @@ function EditForm({
 }) {
   const [error, setError] = useState(null);
   const [teamEdit, setTeamEdit] = useState({
-    name: name,
-    foundation: foundation,
+    team_name: name,
+    foundation_year: foundation,
     city: city,
     wins: wins,
     losses: losses,
     draws: draws,
-    goalsScored: goalsScored,
-    yellowCards: yellowCards,
-    redCards: redCards,
+    goals_for: goalsScored,
+    yellow_cards: yellowCards,
+    red_cards: redCards,
   });
+  const [succes, setSucces] = useState(false)
 
-  console.log(teamEdit);
-
-  console.log("hola", teamEdit);
-
-  console.log("team:", team);
-  console.log("team name:", name);
+  console.log(teamEdit)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("he sido apretado");
+    if (!teamEdit.team_name || !teamEdit.city || !teamEdit.foundation_year || !teamEdit.wins || !teamEdit.draws || !teamEdit.losses || !teamEdit.goals_for || !teamEdit.yellow_cards || !teamEdit.red_cards) {
+      setError("Please fill in all the fields");
+      return;
+    }
+    try {
+      await updateTeam(team[0].team_id, teamEdit)
+      setSucces(true)
+      setError(null)
+ 
+    } catch
+      (error) {
+        console.log(error)
+      }
   };
   return (
     <div>
@@ -124,7 +137,7 @@ function EditForm({
               value={teamEdit.goalsScored}
               onChange={(e) => {
                 const newValue = e.target.value;
-                setTeamEdit({ ...teamEdit, goalsScored: newValue });
+                setTeamEdit({ ...teamEdit, goals_for: newValue });
               }}
             />
           </div>
@@ -146,7 +159,7 @@ function EditForm({
               value={teamEdit.yellowCards}
               onChange={(e) => {
                 const newValue = e.target.value;
-                setTeamEdit({ ...teamEdit, yellowCards: newValue });
+                setTeamEdit({ ...teamEdit, yellow_cards: newValue });
               }}
             />
           </div>
@@ -166,7 +179,7 @@ function EditForm({
               value={teamEdit.redCards}
               onChange={(e) => {
                 const newValue = e.target.value;
-                setTeamEdit({ ...teamEdit, redCards: newValue });
+                setTeamEdit({ ...teamEdit, red_cards: newValue });
               }}
             />
           </div>
@@ -188,7 +201,7 @@ function EditForm({
             value={teamEdit.name}
             onChange={(e) => {
               const newValue = e.target.value;
-              setTeamEdit({ ...teamEdit, name: newValue });
+              setTeamEdit({ ...teamEdit, team_name: newValue });
             }}
           />
         </div>
@@ -228,7 +241,7 @@ function EditForm({
             value={teamEdit.foundation}
             onChange={(e) => {
               const newValue = e.target.value;
-              setTeamEdit({ ...teamEdit, foundation: newValue });
+              setTeamEdit({ ...teamEdit, foundation_year: newValue });
             }}
           />
         </div>
@@ -236,6 +249,8 @@ function EditForm({
         <div className="flex flex-col mb-5"></div>
 
         {error && <div className="text-red-600 mb-3">{error}</div>}
+        {succes && <div className="text-blue-600 mb-3">Team got updated</div>}
+
         <div className="flex flex-col mb-5">
           <button
             type="submit"
