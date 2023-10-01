@@ -29,13 +29,11 @@ function EditForm({
   const [succes, setSucces] = useState(false)
 
 
-  console.log(teamEdit)
   const newPoints = parseInt(teamEdit.wins * 3) + parseInt(teamEdit.draws);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("he sido apretado");
     if (!teamEdit.team_name || !teamEdit.city || !teamEdit.foundation_year || !teamEdit.wins || !teamEdit.draws || !teamEdit.losses || !teamEdit.goals_for || !teamEdit.yellow_cards || !teamEdit.red_cards) {
       setError("Please fill in all the fields");
       return;

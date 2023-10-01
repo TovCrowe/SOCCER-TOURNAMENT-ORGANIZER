@@ -44,7 +44,7 @@ function TeamId() {
     }
 
     fetchData();
-  }, [teamId]);
+  }, [pathname]);
 
   return (
     <EditForm

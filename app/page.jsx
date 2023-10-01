@@ -12,7 +12,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-green-800 mb-4">What is Futbolito?</h2>
         <p className="text-gray-600">
           Futbolito is your all-in-one solution for organizing and tracking soccer tournaments. 
-          Whether you're managing a local league or just a friendly match, our app has you covered.
+          Whether you&apos;re managing a local league or just a friendly match, our app has you covered.
         </p>
       </section>
 
@@ -20,7 +20,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-green-800 mb-4">Key Features</h2>
         <ul className="list-disc pl-6">
           <li className="text-gray-600">Effortless tournament setup and management</li>
-          <li className="text-gray-600">Customization options to match your tournament's style</li>
+          <li className="text-gray-600">Customization options to match your tournament&apos;s style</li>
           <li className="text-gray-600">Connect with other soccer enthusiasts in our community</li>
         </ul>
       </section>
