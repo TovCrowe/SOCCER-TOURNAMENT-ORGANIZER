@@ -2,10 +2,24 @@
 import {useEffect} from "react";
 import {motion} from "framer-motion";
 import { useRouter } from 'next/navigation';
+import deleteTeam from "../db/delete-team";
 
 
-function CardTeams({ team }) {
+function CardTeams({ team, deleteTeamFromState }) {
     const router = useRouter(); 
+
+    const handleDelete = async () => {
+      const confirmDelete = window.confirm("Are you sure you want to delete this team?");
+      if (confirmDelete) {
+        try {
+          await deleteTeam(team.team_id);
+          deleteTeamFromState(team.team_id);
+        } catch (error) {
+          console.error("Error deleting team:", error);
+        }
+      }
+    };
+  
 
   return (
     <motion.div
@@ -35,6 +49,18 @@ function CardTeams({ team }) {
         onClick={() => router.push(`/manageteams/${team.team_id}`)}
         >
           Manage team
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.2 }}
+          type="button"
+          className="inline-block rounded bg-primary px-6 pb-2 pt-2 text-xs m-1 font-medium uppercase leading-normal text-white bg-red-500 shadow-xl"
+          data-te-ripple-init
+          data-te-ripple-color="light"
+        onClick={handleDelete}
+        >
+          DELETE TEAM
         </motion.button>
       </div>
     </motion.div>

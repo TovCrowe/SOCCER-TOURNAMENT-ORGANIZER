@@ -8,6 +8,7 @@ function AddTeams() {
     city: "",
     foundation_year: 0,
   };
+  const [succes, setSucces] = useState(false)
 
   const [teamData, setTeamData] = useState(initialTeamData);
   const [error, setError] = useState(null);
@@ -23,6 +24,7 @@ function AddTeams() {
     try {
       await addTeam(teamData.team_name, teamData.city, teamData.foundation_year);
       setTeamData(initialTeamData);
+      setSucces(true);
       setError(null);
     } catch (error) {
       console.error("Error submitting the form:", error);
@@ -83,12 +85,13 @@ function AddTeams() {
             onChange={(e) =>
               setTeamData({
                 ...teamData,
-                foundation_year: parseInt(e.target.value) || 0,
+                foundation_year: e.target.value === "" ? "" : parseInt(e.target.value) || 0,
               })
             }
           />
         </div>
         {error && <div className="text-red-600 mb-3">{error}</div>}
+        {succes && <div className="text-blue-600 mb-3">Team succesfully added!</div>}
         <div className="flex flex-col mb-5">
           <button
             type="submit"

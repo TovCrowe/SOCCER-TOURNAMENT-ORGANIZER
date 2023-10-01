@@ -11,8 +11,6 @@ export default async function getTeamsDataId(id) {
             throw new Error('Network response was not ok');
         }
         const teams = await response.json();
-        console.log("Teams Data:", teams); // Agregar esta línea para verificar los datos del equipo
-
         return teams;
     } catch (error) {
         console.error(error); // Changed to console.error for better error handling

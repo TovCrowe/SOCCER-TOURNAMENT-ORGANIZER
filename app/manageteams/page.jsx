@@ -5,6 +5,11 @@ import CardTeams from "../components/CardTeams";
 import getTeamsData from "../db/get-teams";
 function ManageTeams() {
 
+  const deleteTeamFromState = (teamId) => {
+    setTeams(teams.filter(team => team.team_id !== teamId));
+  };
+
+
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
@@ -28,7 +33,9 @@ function ManageTeams() {
         
       <div className="grid grid-cols-2 gap-4 justify-evenly">
       {teams.map((team,index)  => (
-        <CardTeams team={team} key={index} />
+        <CardTeams team={team} key={index} deleteTeamFromState={deleteTeamFromState} 
+
+         />
       ))}
       
     </div>

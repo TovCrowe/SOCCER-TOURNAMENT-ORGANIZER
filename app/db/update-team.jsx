@@ -15,7 +15,6 @@ export default async function updateTeam(id, updatedTeamData) {
         }
         const teams = await response.json();
         return teams;
-;
     } catch (error) {
         console.log(error)
     }

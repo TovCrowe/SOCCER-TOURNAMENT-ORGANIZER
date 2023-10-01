@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 import updateTeam from "../db/update-team";
 
-
-
 function EditForm({
   name,
   team,
@@ -30,7 +28,10 @@ function EditForm({
   });
   const [succes, setSucces] = useState(false)
 
+
   console.log(teamEdit)
+  const newPoints = parseInt(teamEdit.wins * 3) + parseInt(teamEdit.draws);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +41,9 @@ function EditForm({
       return;
     }
     try {
+      teamEdit.points = newPoints;
       await updateTeam(team[0].team_id, teamEdit)
+      
       setSucces(true)
       setError(null)
  
@@ -49,6 +52,10 @@ function EditForm({
         console.log(error)
       }
   };
+
+
+
+
   return (
     <div>
       <h1 className="text-center text-6xl text-green-700 mb-8 font-bold p-3">
@@ -75,7 +82,7 @@ function EditForm({
               value={teamEdit.wins}
               onChange={(e) => {
                 const newValue = e.target.value;
-                setTeamEdit({ ...teamEdit, wins: newValue });
+                setTeamEdit({ ...teamEdit, wins: newValue      });
               }}
             />
           </div>

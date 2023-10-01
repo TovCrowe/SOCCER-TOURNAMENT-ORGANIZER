@@ -43,19 +43,10 @@ function Menu({ href }) {
         </Link>
         <hr className="mt-2 mb-2 border-t border-green-300" />
         <Link
-          href="/matchestable"
+          href="/addteams"
           className={`${
             isActive === "/matchestable" ? "text-green-300" : "text-white"
           } text-2xl block hover:text-green-100`}
-        >
-          Matches table
-        </Link>
-        <hr className="mt-2 mb-2 border-t border-green-300" />
-        <Link
-          href="/addteams"
-          className={`${
-            isActive === "/addteams" ? "text-green-300" : "text-white"
-          } text-2xl block  hover:text-green-100`}
         >
           Add a team!
         </Link>
